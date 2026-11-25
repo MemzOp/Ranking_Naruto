@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SHINOBI ARCHIVE — Naruto Shippuden Ranking</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+        :root{--orange:#ff8a1f;--red:#e5443a;--blue:#4cc3ff;--gold:#f5c76b;--panel:#14110f;--muted:#b0a89d;--line:#ffffff20}
+        *{box-sizing:border-box}
+        body{margin:0;background:#0a0807;color:#fff;font-family:Inter,Arial,sans-serif;min-height:100vh}
+        body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 15% 15%,#ff8a1f26,transparent 40%),radial-gradient(ellipse at 90% 50%,#4cc3ff18,transparent 38%),linear-gradient(#0a0807,#120d09)}
+        body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(135deg,#ffffff05 0 2px,transparent 2px 28px)}
+        header{min-height:500px;position:relative;overflow:hidden;border-bottom:1px solid #ffffff25;background:linear-gradient(90deg,#0a0807f5 0%,#0a0807cc 40%,#0a080740 100%),radial-gradient(circle at 78% 40%,#ff8a1f55,transparent 45%),linear-gradient(135deg,#3b1a08,#0f1a2b)}
+        header:after{content:"";position:absolute;right:6%;top:50%;width:min(420px,60vw);aspect-ratio:1;transform:translateY(-50%);border:2px dashed #ff8a1f55;border-radius:50%;box-shadow:inset 0 0 80px #ff8a1f22,0 0 80px #ff8a1f18}
+        .header-inner{max-width:1400px;margin:auto;padding:24px clamp(20px,6vw,82px) 55px;min-height:500px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
+        .topline{display:flex;align-items:center;justify-content:space-between;gap:15px}
+        .brand{font:900 18px "Barlow Condensed";letter-spacing:.2em}.brand b{color:var(--orange)}
+        .online{font-size:10px;letter-spacing:.16em;font-weight:800;color:var(--blue)}
+        .online.off{color:#ff718e}
+        .hero-copy{max-width:650px;margin-top:55px}
+        .eyebrow{font-size:10px;letter-spacing:.3em;color:var(--blue);font-weight:800}
+        .hero-copy h1{font:900 clamp(66px,11vw,132px)/.8 "Barlow Condensed";letter-spacing:-.04em;margin:18px 0 22px;text-shadow:5px 5px 0 #8a3a05}
+        .hero-copy h1 span{color:var(--orange)}
+        .hero-copy p{max-width:500px;color:#e3dbd0;font-size:13px;line-height:1.8}
+        .hero-bottom{display:flex;align-items:center;gap:16px;margin-top:30px}.hero-bottom .line{height:1px;width:60px;background:var(--orange)}.hero-bottom small{font-size:9px;letter-spacing:.22em;color:#d6cdc1}
+        main{max-width:1400px;margin:auto;padding:0 clamp(18px,5vw,70px) 65px}
+        .feature-strip{display:grid;grid-template-columns:155px 1fr;gap:20px;align-items:center;margin:-35px 0 38px;position:relative;z-index:2;padding:13px;background:#14110ff2;border:1px solid #ffffff20;box-shadow:0 18px 50px #0009;backdrop-filter:blur(14px)}
+        .feature-art{height:128px;border:1px solid #ffffff35;background:radial-gradient(circle at 50% 50%,#ff8a1f88,transparent 60%),linear-gradient(135deg,#7a2a08,#0f1a2b);display:grid;place-items:center;font:900 64px "Barlow Condensed";color:#ffffffcc;letter-spacing:.05em}
+        .feature-copy strong{font:800 27px "Barlow Condensed";display:block}.feature-copy strong span{color:var(--orange)}
+        .feature-copy p{font-size:11px;line-height:1.65;color:var(--muted);margin:5px 0 0}
+        @media(max-width:650px){.feature-strip{grid-template-columns:100px 1fr;margin-top:-25px}.feature-art{height:105px;font-size:44px}.feature-copy strong{font-size:22px}}
+        .nav-wrap{border-bottom:1px solid var(--line);margin-bottom:28px}
+        .tabs{display:flex;gap:7px;overflow-x:auto;padding:0 0 12px;scrollbar-width:thin}
+        .tab{white-space:nowrap;background:#17130f;border:1px solid #ffffff20;color:#cfc7bc;padding:13px 20px;font:800 11px Inter;letter-spacing:.12em;cursor:pointer;transition:.2s;display:flex;gap:9px;align-items:center}
+        .tab:hover{border-color:#ff8a1f88;color:#fff}
+        .tab.active{color:#fff;border-color:transparent;background:linear-gradient(110deg,#ff8a1f,#c4491a);box-shadow:0 7px 22px #ff8a1f35}
+        .tab em{font-style:normal;background:#00000055;padding:2px 8px;border-radius:99px;font-size:10px}
+        .section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+        .section-kicker{font-size:9px;color:var(--blue);letter-spacing:.24em;font-weight:800}
+        .section-head h2{font:900 43px/.95 "Barlow Condensed";margin:7px 0 0}.section-head h2 span{color:var(--orange)}
+        .section-desc{font-size:11px;color:var(--muted);margin-top:7px}
+        .tools{display:flex;gap:9px;flex-wrap:wrap}
+        .search{min-width:220px;background:#14110f;border:1px solid #ffffff26;color:#fff;padding:12px 14px;outline:none}
+        .search:focus,input:focus,select:focus{border-color:var(--orange)}
+        .primary{background:linear-gradient(110deg,#ff8a1f,#c4491a);border:0;color:#fff;padding:13px 17px;font-weight:800;font-size:10px;letter-spacing:.1em;cursor:pointer}.primary:hover{filter:brightness(1.12)}
+        .ghost{background:#231d17;color:#eee;border:1px solid #ffffff26;padding:11px 14px;cursor:pointer}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:17px}
+        .card{background:linear-gradient(150deg,#1b1611f5,#100d0af5);border:1px solid #ffffff20;overflow:hidden;transition:.25s}
+        .card:hover{transform:translateY(-5px);border-color:#ff8a1f99;box-shadow:0 18px 45px #0009}
+        .visual{height:150px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--rc1),var(--rc2))}
+        .visual:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0c0a08 0%,transparent 70%)}
+        .initial{position:absolute;inset:0;display:grid;place-items:center;font:900 96px "Barlow Condensed";color:#ffffff42}
+        .tag{position:absolute;z-index:1;top:12px;left:12px;background:#0a0807dc;border:1px solid #ffffff35;padding:6px 9px;font-size:9px;letter-spacing:.12em;font-weight:800;color:var(--rc)}
+        .tag.nuke{left:auto;right:12px;color:#ff718e;border-color:#ff718e66}
+        .card.forte{--rc:#ff7468;--rc1:#7a1f1a;--rc2:#2a1214}.card.medio{--rc:#ffc15e;--rc1:#7a4b10;--rc2:#2a1d0e}.card.fraco{--rc:#b8c6d6;--rc1:#34404d;--rc2:#161b21}
+        .content{padding:16px}
+        .kind{font-size:9px;color:var(--blue);font-weight:800;letter-spacing:.18em}
+        .content h3{font:800 28px "Barlow Condensed";text-transform:uppercase;margin:6px 0}
+        .sub{font-size:10px;color:var(--orange);margin-bottom:12px}
+        .badges{display:flex;flex-wrap:wrap;gap:6px;min-height:28px}
+        .badge{font-size:9px;font-weight:800;letter-spacing:.08em;padding:5px 8px;border:1px solid #ffffff2c;background:#ffffff0a;color:#e6dfd5}
+        .badge.k{color:var(--gold);border-color:#f5c76b66}.badge.j{color:#ff9d5c;border-color:#ff9d5c66}.badge.e{color:var(--blue);border-color:#4cc3ff66}
+        .card-actions{display:flex;gap:7px;margin-top:15px}
+        .card-actions button{flex:1;padding:10px 5px;border:1px solid #ffffff1c;background:#231d17;color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;cursor:pointer}
+        .card-actions .edit{color:var(--blue)}.card-actions .del{color:#ff8298}
+        .empty{grid-column:1/-1;text-align:center;padding:60px 20px;border:1px dashed #ffffff35;background:#110e0b99;color:var(--muted);font-size:11px;line-height:1.7}
+        .empty strong{display:block;font:800 30px "Barlow Condensed";color:#fff;margin-bottom:8px}
+        footer{border-top:1px solid #ffffff20;padding:22px clamp(18px,6vw,82px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#7d766c;font-size:9px;letter-spacing:.15em}
+        .backdrop{position:fixed;inset:0;background:#050403dc;display:none;align-items:center;justify-content:center;padding:16px;z-index:10;backdrop-filter:blur(8px)}.backdrop.open{display:flex}
+        .modal{width:min(590px,100%);max-height:92vh;overflow:auto;background:#16120e;border:1px solid #b5561a;border-radius:3px;box-shadow:0 20px 90px #000}
+        .modal-head{padding:19px 22px;border-bottom:1px solid #ffffff20;display:flex;justify-content:space-between;align-items:center}
+        .modal-head h2{font:800 28px "Barlow Condensed";margin:0}
+        .close{background:none;border:0;color:#aaa;font-size:25px;cursor:pointer}
+        form{padding:20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:13px}
+        .field{display:flex;flex-direction:column;gap:7px}.full{grid-column:1/-1}
+        label{font-size:9px;color:#d2cabf;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
+        input[type=text],select{width:100%;background:#0d0b09;border:1px solid #3d332a;padding:11px;color:#fff;font:12px Inter;outline:none}
+        .check{display:flex;align-items:center;gap:11px;background:#0d0b09;border:1px solid #3d332a;padding:12px;cursor:pointer;text-transform:none;letter-spacing:0;font-size:12px}
+        .check input{width:16px;height:16px;accent-color:var(--orange)}
+        .check small{display:block;color:var(--muted);font-weight:500;font-size:10px;margin-top:2px}
+        .form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:9px;margin-top:5px}
+        .toast{position:fixed;right:20px;bottom:20px;z-index:20;background:#1d1812;border:1px solid var(--blue);padding:13px 17px;display:none;max-width:calc(100vw - 40px);font-size:12px}.toast.error{border-color:#ff718e}
+        @media(max-width:650px){header,.header-inner{min-height:450px}.hero-copy{margin-top:60px}.stat strong{font-size:34px}.section-head h2{font-size:36px}.tools,.search{width:100%}.tools .primary{flex:1}form{grid-template-columns:1fr}.full,.form-actions{grid-column:1}}
+    </style>
+</head>
+<body>
+<header><div class="header-inner">
+    <div class="topline"><div class="brand">SHINOBI <b>ARCHIVE</b> / NARUTO SHIPPUDEN</div><div class="online off" id="online">● API // CONECTANDO</div></div>
+    <div class="hero-copy">
+        <div class="eyebrow">VILAS OCULTAS • SISTEMA DE RANKING</div>
+        <h1>LIVRO<br><span>BINGO</span></h1>
+        <p>Seu arquivo pessoal do mundo ninja. Organize shinobis em três abas (fraco, médio e forte) com vila, Kage, Jinchuriki, elemento e Nukenin, tudo salvo direto na sua API Java.</p>
+        <div class="hero-bottom"><div class="line"></div><small>A VONTADE DO FOGO NUNCA SE APAGA</small></div>
+    </div>
+</div></header>
+
+<main>
+    <div class="feature-strip">
+        <div class="feature-art" role="img" aria-label="Símbolo shinobi">忍</div>
+        <div class="feature-copy"><strong>THE <span>SHINOBI</span> FILES</strong><p>Três classes. Um mundo ninja. Explore cada aba separadamente (fraco, médio e forte) e cadastre cada shinobi na categoria certa. Selecione uma aba para abrir o respectivo arquivo.</p></div>
+    </div>
+
+    <div class="nav-wrap"><nav class="tabs" id="tabs"></nav></div>
+
+    <section>
+        <div class="section-head">
+            <div>
+                <div class="section-kicker" id="kicker">01 / CLASSE FRACA</div>
+                <h2 id="title">FRACOS <span>REGISTRADOS</span></h2>
+                <div class="section-desc" id="desc">Shinobis em início de jornada.</div>
+            </div>
+            <div class="tools">
+                <input id="search" class="search" type="search" placeholder="Buscar nome, vila, elemento...">
+                <button id="newBtn" class="primary">＋ NOVO NINJA</button>
+            </div>
+        </div>
+        <section class="grid" id="grid"><div class="empty"><strong>CARREGANDO...</strong>Conectando à API.</div></section>
+    </section>
+</main>
+
+<footer><span>SHINOBI ARCHIVE // NARUTO SHIPPUDEN FAN DATABASE</span><span>API: localhost:8080/api/ninjas</span></footer>
+
+<div class="backdrop" id="backdrop"><div class="modal">
+    <div class="modal-head"><h2 id="modalTitle">NOVO NINJA</h2><button class="close" id="close">×</button></div>
+    <form id="form">
+        <div class="field full"><label for="f_nome">Nome *</label><input type="text" id="f_nome" required placeholder="Ex.: Naruto Uzumaki"></div>
+        <div class="field"><label for="f_sexo">Sexo *</label><select id="f_sexo"></select></div>
+        <div class="field"><label for="f_ranking">Ranking *</label><select id="f_ranking"></select></div>
+        <div class="field full"><label for="f_vila">Vila *</label><select id="f_vila" required></select></div>
+        <div class="field"><label for="f_kage">Kage</label><select id="f_kage"></select></div>
+        <div class="field"><label for="f_jinchuriki">Jinchuriki</label><select id="f_jinchuriki"></select></div>
+        <div class="field"><label for="f_elemento">Elemento</label><select id="f_elemento"></select></div>
+        <div class="field"><label>&nbsp;</label><label class="check"><input type="checkbox" id="f_nukenin"><span><b>Nukenin (renegado)</b><small>Abandonou a vila</small></span></label></div>
+        <div class="form-actions"><button type="button" class="ghost" id="cancel">CANCELAR</button><button class="primary" type="submit" id="save">SALVAR NINJA</button></div>
+    </form>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+    const API='http://localhost:8080/api/ninjas';
+
+    /* Enums: os valores devem ser iguais aos enums do Java */
+    const RANKINGS=[['FORTE','Forte'],['MEDIO','Médio'],['FRACO','Fraco']];
+    const SEXOS=[['MASCULINO','Masculino'],['FEMININO','Feminino']];
+    const KAGES=[['NENHUM','Nenhum (não é Kage)'],['HOKAGE','Hokage'],['KAZEKAGE','Kazekage'],['MIZUKAGE','Mizukage'],['RAIKAGE','Raikage'],['TSUCHIKAGE','Tsuchikage']];
+    const JINCHURIKIS=[['NENHUM','Nenhum (não é Jinchuriki)'],['SHUKAKU','Shukaku (1 cauda)'],['MATATABI','Matatabi (2 caudas)'],['ISOBU','Isobu (3 caudas)'],['SON_GOKU','Son Goku (4 caudas)'],['KOKUO','Kokuo (5 caudas)'],['SAIKEN','Saiken (6 caudas)'],['CHOMEI','Chomei (7 caudas)'],['GYUKI','Gyuki (8 caudas)'],['KURAMA','Kurama (9 caudas)']];
+    const ELEMENTOS=[['NENHUM','Nenhum'],['FOGO','Fogo (Katon)'],['AGUA','Água (Suiton)'],['VENTO','Vento (Fuuton)'],['RAIO','Raio (Raiton)'],['TERRA','Terra (Doton)']];
+    const VILAS=[['KONOHA','Konoha (Folha)'],['SUNA','Suna (Areia)'],['KIRI','Kiri (Névoa)'],['KUMO','Kumo (Nuvem)'],['IWA','Iwa (Pedra)'],['OTO','Oto (Som)'],['AME','Ame (Chuva)'],['TAKI','Taki (Cachoeira)'],['KUSA','Kusa (Grama)'],['YUKI','Yuki (Neve)']];
+
+    /* [valor, rótulo, ícone, kicker, título, descrição] */
+    const ABAS=[['FRACO','FRACO','◔','01 / CLASSE FRACA','FRACOS <span>REGISTRADOS</span>','Shinobis em início de jornada.'],
+        ['MEDIO','MÉDIO','◑','02 / CLASSE MÉDIA','MÉDIOS <span>REGISTRADOS</span>','Shinobis de força intermediária.'],
+        ['FORTE','FORTE','●','03 / CLASSE FORTE','FORTES <span>REGISTRADOS</span>','Os shinobis mais poderosos do mundo ninja.']];
+
+    let aba='FRACO', ninjas=[];
+    const $=id=>document.getElementById(id);
+    const nome=(lista,v)=>(lista.find(([k])=>k===v)||[v,v||''])[1];
+    const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function toast(msg,error=false){const t=$('toast');t.textContent=msg;t.className='toast'+(error?' error':'');t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3500)}
+
+    async function api(path='',options={}){
+        const res=await fetch(API+path,{...options,headers:{'Content-Type':'application/json',...(options.headers||{})}});
+        if(!res.ok) throw new Error((await res.text())||`HTTP ${res.status}`);
+        if(res.status===204) return null;
+        const t=await res.text(); return t?JSON.parse(t):null;
+    }
+
+    function fillSelects(){
+        const put=(id,list)=>$(id).innerHTML=list.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+        put('f_sexo',SEXOS);put('f_ranking',RANKINGS);put('f_vila',VILAS);put('f_kage',KAGES);put('f_jinchuriki',JINCHURIKIS);put('f_elemento',ELEMENTOS);
+    }
+
+    function renderTabs(){
+        const cont=k=>ninjas.filter(n=>n.ranking===k).length;
+        $('tabs').innerHTML=ABAS.map(([k,l,ic])=>`<button class="tab ${k===aba?'active':''}" data-aba="${k}">${ic} &nbsp; ${l}<em>${cont(k)}</em></button>`).join('');
+    }
+
+    function render(){
+        renderTabs();
+        const termo=$('search').value.trim().toLowerCase();
+        const lista=ninjas
+            .filter(n=>n.ranking===aba)
+            .filter(n=>[n.nome,nome(VILAS,n.vila),nome(ELEMENTOS,n.elemento),nome(KAGES,n.kage),nome(JINCHURIKIS,n.jinchuriki)].join(' ').toLowerCase().includes(termo))
+            .sort((a,b)=>(a.nome||'').localeCompare(b.nome||''));
+        if(!lista.length){
+            $('grid').innerHTML=`<div class="empty"><strong>NENHUM NINJA ENCONTRADO</strong>${termo?'Tente outro termo de busca.':'Este arquivo ainda está vazio. Adicione o primeiro ninja desta classe.'}<br><br><button class="primary" onclick="openForm()">＋ CADASTRAR NINJA ${ABAS.find(x=>x[0]===aba)[1]}</button></div>`;
+            return;
+        }
+        $('grid').innerHTML=lista.map(n=>{
+            const cls=(n.ranking||'fraco').toLowerCase();
+            const kage=n.kage&&n.kage!=='NENHUM'?`<span class="badge k">${esc(nome(KAGES,n.kage).toUpperCase())}</span>`:'';
+            const jin=n.jinchuriki&&n.jinchuriki!=='NENHUM'?`<span class="badge j">${esc(nome(JINCHURIKIS,n.jinchuriki).toUpperCase())}</span>`:'';
+            const ele=n.elemento&&n.elemento!=='NENHUM'?`<span class="badge e">${esc(nome(ELEMENTOS,n.elemento).toUpperCase())}</span>`:'';
+            return `<article class="card ${cls}">
+      <div class="visual"><div class="initial">${esc((n.nome||'?').charAt(0).toUpperCase())}</div>
+        <span class="tag">${esc(nome(RANKINGS,n.ranking).toUpperCase())}</span>${n.nukenin?'<span class="tag nuke">NUKENIN</span>':''}</div>
+      <div class="content">
+        <div class="kind">SHINOBI • ${esc(nome(VILAS,n.vila).split(' (')[0].toUpperCase())}</div>
+        <h3>${esc(n.nome||'Sem nome')}</h3>
+        <div class="sub">${esc(nome(SEXOS,n.sexo))} • ${esc(nome(VILAS,n.vila))}</div>
+        <div class="badges">${kage}${jin}${ele}${!kage&&!jin&&!ele?'<span class="badge">SEM TÍTULOS</span>':''}</div>
+        <div class="card-actions"><button class="edit" data-edit="${esc(n.id)}">EDITAR</button><button class="del" data-del="${esc(n.id)}">EXCLUIR</button></div>
+      </div></article>`;
+        }).join('');
+    }
+
+    async function load(){
+        try{
+            const data=await api();
+            ninjas=Array.isArray(data)?data:(data?.content||[]);
+            $('online').textContent='● API // ONLINE';$('online').className='online';
+            render();
+        }catch(e){
+            ninjas=[];renderTabs();
+            $('online').textContent='● API // OFFLINE';$('online').className='online off';
+            $('grid').innerHTML=`<div class="empty"><strong>API OFFLINE</strong>O visual está pronto, mas a API não respondeu. Inicie o backend em <b>localhost:8080</b> e confira o CORS.<br><br><small>${esc(e.message)}</small><br><br><button class="ghost" onclick="load()">TENTAR NOVAMENTE</button></div>`;
+        }
+    }
+
+    function setAba(k){
+        aba=k;const a=ABAS.find(x=>x[0]===k);
+        $('kicker').textContent=a[3];$('title').innerHTML=a[4];$('desc').textContent=a[5];
+        $('search').value='';
+        render();
+        window.scrollTo({top:document.querySelector('.section-head').getBoundingClientRect().top+window.scrollY-20,behavior:'smooth'});
+    }
+
+    /* Formulário: o id fica só em editId, nunca aparece na tela */
+    let editId=null;
+    function openForm(n=null){
+        editId=n?n.id:null;
+        $('form').reset();
+        $('f_nome').value=n?.nome||'';
+        $('f_sexo').value=n?.sexo||'MASCULINO';
+        $('f_ranking').value=n?.ranking||aba;
+        $('f_vila').value=n?.vila||'KONOHA';
+        $('f_kage').value=n?.kage||'NENHUM';
+        $('f_jinchuriki').value=n?.jinchuriki||'NENHUM';
+        $('f_elemento').value=n?.elemento||'NENHUM';
+        $('f_nukenin').checked=!!n?.nukenin;
+        $('modalTitle').textContent=n?'EDITAR NINJA':'NOVO NINJA';
+        $('backdrop').classList.add('open');
+    }
+    const closeForm=()=>$('backdrop').classList.remove('open');
+
+    $('form').addEventListener('submit',async e=>{
+        e.preventDefault();
+        const body={nome:$('f_nome').value.trim(),sexo:$('f_sexo').value,ranking:$('f_ranking').value,vila:$('f_vila').value,kage:$('f_kage').value,jinchuriki:$('f_jinchuriki').value,elemento:$('f_elemento').value,nukenin:$('f_nukenin').checked};
+        $('save').disabled=true;
+        try{
+            await api(editId!==null?'/'+editId:'',{method:editId!==null?'PUT':'POST',body:JSON.stringify(body)});
+            closeForm();toast(editId!==null?'Ninja atualizado!':'Ninja cadastrado!');
+            if(aba!==body.ranking) setAba(body.ranking);
+            await load();
+        }catch(err){toast('Erro ao salvar: '+err.message,true)}
+        finally{$('save').disabled=false}
+    });
+
+    $('grid').addEventListener('click',async e=>{
+        const ed=e.target.closest('[data-edit]'),del=e.target.closest('[data-del]');
+        if(ed){const n=ninjas.find(x=>String(x.id)===ed.dataset.edit);if(n)openForm(n)}
+        if(del){
+            if(!confirm('Deseja excluir este ninja?'))return;
+            try{await api('/'+del.dataset.del,{method:'DELETE'});toast('Ninja excluído!');load()}
+            catch(err){toast('Erro ao excluir: '+err.message,true)}
+        }
+    });
+    $('tabs').addEventListener('click',e=>{const b=e.target.closest('[data-aba]');if(b)setAba(b.dataset.aba)});
+    $('newBtn').addEventListener('click',()=>openForm());
+    $('close').addEventListener('click',closeForm);$('cancel').addEventListener('click',closeForm);
+    $('backdrop').addEventListener('click',e=>{if(e.target===$('backdrop'))closeForm()});
+    $('search').addEventListener('input',render);
+
+    fillSelects();renderTabs();load();
+</script>
+</body>
+</html>
